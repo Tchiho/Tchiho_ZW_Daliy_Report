@@ -353,14 +353,16 @@ def select_chart4():
             sql = "SELECT col1 FROM tablezjlive WHERE col12 LIKE %s AND col42 = '是' AND col = %s"
             time = today-timedelta(days=index)
             num = cursor.execute(sql, (region + '%', time))
-            # Table_2.loc[region, "装移在途超时工单" + time.strftime("%Y-%m-%d")] = num 
-            Table_2.loc[region, "装" + str(5-index)] = num
+            Table_2.loc[region, "装移在途超时工单" + time.strftime("%Y-%m-%d")] = num 
+            # Table_2.loc[region, "装" + str(5-index)] = num
 
+    for index in range(0,5):
+        for region in regions:
             sql = "SELECT col1 FROM tablegzlive WHERE col4 LIKE %s AND col2 = '是' AND col = %s"
             time = today-timedelta(days=index)
             num = cursor.execute(sql, ("%" + region + '%', time))
-            # Table_2.loc[region, "故障在途超时工单" + time.strftime("%Y-%m-%d")] = num 
-            Table_2.loc[region, "故" + str(5-index)] = num
+            Table_2.loc[region, "故障在途超时工单" + time.strftime("%Y-%m-%d")] = num 
+            # Table_2.loc[region, "故" + str(5-index)] = num
 
 
 
@@ -413,5 +415,7 @@ Table_1 = Table_1.astype(int)
 Table_2 = Table_2.astype(int)
 # 保留两位小数
 Table_3 = Table_3.round(2)
+
+# print(Table_2)
 cursor.close()
 dbconn.close()
