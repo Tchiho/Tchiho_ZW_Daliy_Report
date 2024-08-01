@@ -127,7 +127,7 @@ def PPTX():
     # 添加文本，并设置格式
     p = tf.paragraphs[0]  # 添加段落
     run = p.add_run()  # 创建一个Run对象，不立即添加文本
-    run.text = '5、 全市参评“百千工程”分支局“装移机履约及时率”未达标单位(本月无未达标单位）'  # 设置Run对象的文本
+    run.text = '5、 全市参评“百千工程”分支局“装移机履约及时率”未达标单位'  # 设置Run对象的文本
     run.font.bold = True  # 设置文本加粗
     run.font.size = Pt(14)  # 设置字号大小
     run.font.name = '微软雅黑'  # 设置字体

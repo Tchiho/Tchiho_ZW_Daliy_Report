@@ -8,10 +8,9 @@ def Draw_Chart_1():
     # 准备数据
     categories = MySQL.gz_person
     values = MySQL.gz_num
-    plt.figure(figsize=(6, 3))
-
+    plt.figure(figsize=(4, 3))
     # 绘制柱状图
-    plt.bar(categories, values)
+    plt.bar(categories, values, width=0.5)
 
     # 去掉顶端和右侧的边框
     plt.gca().spines['top'].set_visible(False)
@@ -41,7 +40,7 @@ def Draw_Chart_2():
     ax = plt.gca()  # 获取当前轴
 
     # 绘制柱状图
-    plt.bar(categories, values, width=0.3)
+    plt.bar(categories, values, width=0.5)
 
     # 去掉顶端和右侧的边框
     plt.gca().spines['top'].set_visible(False)
