@@ -59,8 +59,12 @@ def select_table68():
         results = cursor.fetchall() 
         # 获取元组长度
         result_len = results.__len__()
-        if result_len > 1 :
-            print("出现错误，检查取数逻辑")
+        if result_len != 1 :
+            print("数据库信息错误，检查数据是否正确！")
+            Table_1.loc[region, '装移-FTTR-昨日归档'] = 0
+            Table_1.loc[region, '装移-FTTR-昨日归档（有连接）'] = 0
+            Table_1.loc[region, '装移-FTTR-昨日归档（光连接）'] = 0
+
         # 打印结果
         count_col1 = 0
         count_col2 = 0
@@ -395,6 +399,8 @@ def Trans_Table_mini(table):
         table.loc["全市", col] = table.loc[:, col].sum()
     return table
 
+# print(Table_1)
+
 Table_1 = Trans_Table(Table_1, Table_1_new_col)
 Table_2 = Trans_Table_mini(Table_2)
 Table_3 = Trans_Table(Table_3, Table_3_new_col)
@@ -404,9 +410,6 @@ Table_3.loc["全市", "感知-感知修复"] =Table_3.loc["全市", "感知-已�
 Table_3.loc["全市", "质差-感知修复"] =Table_3.loc["全市", "质差-已修复"] / Table_3.loc["全市", "质差-派单数量"]
 Table_3.loc["全市", "总整治成功率-全市在途"] = Table_3.loc["全市", "感知-在途"] + Table_3.loc["全市", "质差-在途"]
 Table_3.loc["全市", "总整治成功率-总质差率"] = (Table_3.loc["全市", "感知-已修复"] + Table_3.loc["全市", "质差-已修复"]) / (Table_3.loc["全市", "感知-派单数量"] + Table_3.loc["全市", "质差-派单数量"]) 
-
-
-
 
 
 

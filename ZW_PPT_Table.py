@@ -93,13 +93,16 @@ def Draw_Table_2():
 
 def Draw_Table_3():
     Tab3 = MySQL.Table_3
-    data = Tab3.values.astype(float)
+    data = Tab3.values.astype(int)
     # 列的名字
-    lie_name = ["派单\n数量", "已修复", "未修复", '在途', '感知\n修复', '派单\n数量`', '已修复`', '未修复`', '在途`', '质差\n修复', '总质\n差率', '全市\n在途']
+    lie_name = ["派单\n数量", "已修复", "未修复", '在途', '感知\n修复', ' 派单 \n 数量 ', ' 已修复 ', ' 未修复 ', ' 在途 ', '质差\n修复', '总质\n差率', '全市\n在途']
     # 行的名字
     hang_name = MySQL.Table_3.index.to_list()
     # 生成一个包含随机数据的表格
-    d = pd.DataFrame(data, columns=lie_name, index=hang_name).round(2)
+    d = pd.DataFrame(data, columns=lie_name, index=hang_name)
+    d["感知\n修复"] = Tab3["感知-感知修复"].astype(float)
+    d["质差\n修复"] = Tab3["质差-感知修复"].astype(float)
+    d["总质\n差率"] = Tab3["总整治成功率-总质差率"].astype(float)
     fig, ax = plt.subplots(figsize=(10, 4.5))
     column = ([ColDef("index", title="单位", textprops={"ha": "center"}, border='both')]
             +
@@ -108,10 +111,10 @@ def Draw_Table_3():
             ColumnDefinition(name='未修复', group='感知', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='在途', group='感知', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='感知\n修复', group='感知', border='both', textprops={"ha": "center"}),
-            ColumnDefinition(name='派单\n数量`', group="质差", border='both', textprops={"ha": "center"}),
-            ColumnDefinition(name='已修复`', group='质差', border='both', textprops={"ha": "center"}),
-            ColumnDefinition(name='未修复`', group='质差', border='both', textprops={"ha": "center"}),
-            ColumnDefinition(name='在途`', group='质差', border='both', textprops={"ha": "center"}),
+            ColumnDefinition(name=' 派单 \n 数量 ', group="质差", border='both', textprops={"ha": "center"}),
+            ColumnDefinition(name=' 已修复 ', group='质差', border='both', textprops={"ha": "center"}),
+            ColumnDefinition(name=' 未修复 ', group='质差', border='both', textprops={"ha": "center"}),
+            ColumnDefinition(name=' 在途 ', group='质差', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='质差\n修复', group='质差', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='总质\n差率', group="总整治成功率", border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='全市\n在途', group='总整治成功率', border='both', textprops={"ha": "center"})])
