@@ -8,6 +8,7 @@ from pptx.dml.color import RGBColor
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from ZW_PPT_Title_Head import PPT_Title_Head
 import MySQL, ZW_PPT_Chart, ZW_PPT_Table, Trans_Pic
+import re
 
 def PPTX():
     # 创建一个新的演示文稿
@@ -143,12 +144,67 @@ def PPTX():
     textbox = slide.shapes.add_textbox(left=Cm(0.575), top=Cm(21), width=Cm(21), height=Cm(10.5))
     tf = textbox.text_frame
     # 添加文本，并设置格式
+
+
+    text = MySQL.Txt_2
+    pattern = r'\n'
+    results = re.split(pattern, text)
+
+
+
     p = tf.paragraphs[0]  # 添加段落
     run = p.add_run()  # 创建一个Run对象，不立即添加文本
-    run.text = MySQL.Txt_2  # 设置Run对象的文本
+    run.text = results[0] + "\n" + results[1]  # 设置Run对象的文本
     run.font.bold = False  # 设置文本加粗
     run.font.size = Pt(16)  # 设置字号大小
     run.font.name = '微软雅黑'  # 设置字体
+
+    p = tf.add_paragraph()
+    run = p.add_run()  # 创建一个Run对象，不立即添加文本
+    run.text = results[2] + "\n" + results[3] + "\n" + results[4] # 设置Run对象的文本
+    run.font.bold = False  # 设置文本加粗
+    run.font.size = Pt(16)  # 设置字号大小
+    run.font.name = '微软雅黑'  # 设置字体
+    run.font.color.rgb = RGBColor(255, 0, 0)  
+
+    p = tf.add_paragraph()
+    run = p.add_run()  # 创建一个Run对象，不立即添加文本
+    run.text = results[5] # 设置Run对象的文本
+    run.font.bold = False  # 设置文本加粗
+    run.font.size = Pt(16)  # 设置字号大小
+    run.font.name = '微软雅黑'  # 设置字体
+
+
+    p = tf.add_paragraph()
+    run = p.add_run()  # 创建一个Run对象，不立即添加文本
+    run.text = results[6] + "\n" + results[7] + "\n" + results[8] # 设置Run对象的文本
+    run.font.bold = False  # 设置文本加粗
+    run.font.size = Pt(16)  # 设置字号大小
+    run.font.name = '微软雅黑'  # 设置字体
+    run.font.color.rgb = RGBColor(255, 0, 0) 
+
+    p = tf.add_paragraph()
+    run = p.add_run()  # 创建一个Run对象，不立即添加文本
+    run.text = results[9] # 设置Run对象的文本
+    run.font.bold = False  # 设置文本加粗
+    run.font.size = Pt(16)  # 设置字号大小
+    run.font.name = '微软雅黑'  # 设置字体
+
+    p = tf.add_paragraph()
+    run = p.add_run()  # 创建一个Run对象，不立即添加文本
+    run.text = results[10] + "\n" + results[11] + "\n" + results[12] # 设置Run对象的文本
+    run.font.bold = False  # 设置文本加粗
+    run.font.size = Pt(16)  # 设置字号大小
+    run.font.name = '微软雅黑'  # 设置字体
+    run.font.color.rgb = RGBColor(255, 0, 0) 
+
+    p = tf.add_paragraph()
+    run = p.add_run()  # 创建一个Run对象，不立即添加文本
+    run.text = results[13] # 设置Run对象的文本
+    run.font.bold = False  # 设置文本加粗
+    run.font.size = Pt(16)  # 设置字号大小
+    run.font.name = '微软雅黑'  # 设置字体
+
     line = textbox.line
     line.fill.solid()  # 确保线条填充为纯色
     line.fill.fore_color.rgb = RGBColor(255, 0, 0)  # 红色

@@ -305,17 +305,17 @@ def write_Txt_2(Table_1):
     bmy_all = Table_1["修障不满意"].sum()
     Temp_txt = "每日工作温馨提醒:{date}上午9点全市在途装移修全量工单{all}张。\n"\
         "全市在途装移机工单{ztzy_all}张，超时{ztzy_overtime}张；\n"\
-        "TOP3：{ztzy_region_1} {ztzy_num_1}张，超时{ztzy_overtime_1}张；\n"\
-        "{ztzy_region_2} {ztzy_num_2}张，超时{ztzy_overtime_2}张；\n"\
-        "{ztzy_region_3} {ztzy_num_3}张，超时{ztzy_overtime_3}张；\n"\
+        "TOP3:  {ztzy_region_1} {ztzy_num_1}张，超时{ztzy_overtime_1}张；\n"\
+        "       {ztzy_region_2} {ztzy_num_2}张，超时{ztzy_overtime_2}张；\n"\
+        "       {ztzy_region_3} {ztzy_num_3}张，超时{ztzy_overtime_3}张；\n"\
         "全市在途故障工单{ztgz_all}张，超时{ztgz_overtime}张\n"\
-        "TOP3：{ztgz_region_1} {ztgz_num_1}张， 超时{ztgz_overtime_1}张；\n"\
-        "{ztgz_region_2} {ztgz_num_2}张， 超时{ztgz_overtime_2}张\n"\
-        "{ztgz_region_3} {ztgz_num_3}张 ，超时{ztgz_overtime_3}张\n"\
+        "TOP3:  {ztgz_region_1} {ztgz_num_1}张， 超时{ztgz_overtime_1}张；\n"\
+        "       {ztgz_region_2} {ztgz_num_2}张， 超时{ztgz_overtime_2}张；\n"\
+        "       {ztgz_region_3} {ztgz_num_3}张 ，超时{ztgz_overtime_3}张；\n"\
         "全市在途调度工单{ztdd_all}张，超时{ztdd_overtime}张；\n"\
-        "TOP3：{ztdd_region_1} {ztdd_num_1}张， 超时{ztdd_overtime_1}张；\n"\
-        "{ztdd_region_2} {ztdd_num_2}张， 超时{ztdd_overtime_2}张；\n"\
-        "{ztdd_region_3} {ztdd_num_3}张， 超时{ztdd_overtime_3}张；\n"\
+        "TOP3:  {ztdd_region_1} {ztdd_num_1}张， 超时{ztdd_overtime_1}张；\n"\
+        "       {ztdd_region_2} {ztdd_num_2}张， 超时{ztdd_overtime_2}张；\n"\
+        "       {ztdd_region_3} {ztdd_num_3}张， 超时{ztdd_overtime_3}张；\n"\
         "全市修障不满意需上门修复工单{bmy_all}张；".format(date = formatted_date, all = all, 
                                            ztzy_all = ztzy_all, ztzy_overtime = ztzy_overtime, 
                                            ztzy_region_1 = ztzy_region_1, ztzy_num_1 = ztzy_num_1, ztzy_overtime_1 = ztzy_overtime_1,

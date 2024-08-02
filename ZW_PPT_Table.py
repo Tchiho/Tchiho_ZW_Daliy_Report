@@ -1,11 +1,13 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+
 from plottable import ColumnDefinition, ColDef, Table
 import numpy
 import matplotlib.cm
 from datetime import datetime, timedelta
 import MySQL
-
+from matplotlib.colors import LinearSegmentedColormap
+from plottable.cmap import centered_cmap
 matplotlib.rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体
 matplotlib.rcParams['axes.unicode_minus'] = False  # 解决保存图像时负号'-'显示为方块的问题
 Table_1_col_mapping = {"装移-FTTR-昨日归档": "归档", 
@@ -103,14 +105,25 @@ def Draw_Table_3():
     d["感知\n修复"] = Tab3["感知-感知修复"].astype(float)
     d["质差\n修复"] = Tab3["质差-感知修复"].astype(float)
     d["总质\n差率"] = Tab3["总整治成功率-总质差率"].astype(float)
+
+    sorted_numbers = sorted(set(d["感知\n修复"]))
+    third_smallest = sorted_numbers[2]
+    
     fig, ax = plt.subplots(figsize=(10, 4.5))
+    # 定义颜色断点和对应的值
+    color_breakpoints = [(0, 'red'), (1, 'black')]
+    # 创建 LinearSegmentedColormap 实例
+    custom_cmap = LinearSegmentedColormap.from_list('custom_cmap', color_breakpoints, N=2)
     column = ([ColDef("index", title="单位", textprops={"ha": "center"}, border='both')]
             +
             [ColumnDefinition(name='派单\n数量', group="感知", border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='已修复', group='感知', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='未修复', group='感知', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='在途', group='感知', border='both', textprops={"ha": "center"}),
-            ColumnDefinition(name='感知\n修复', group='感知', border='both', textprops={"ha": "center"}),
+            ColumnDefinition(
+                name='感知\n修复',
+                text_cmap=centered_cmap(d["感知\n修复"], cmap=custom_cmap, num_stds=1, center=third_smallest),
+                group='感知', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name=' 派单 \n 数量 ', group="质差", border='both', textprops={"ha": "center"}),
             ColumnDefinition(name=' 已修复 ', group='质差', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name=' 未修复 ', group='质差', border='both', textprops={"ha": "center"}),
