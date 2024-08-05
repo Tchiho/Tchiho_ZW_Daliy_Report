@@ -106,33 +106,46 @@ def Draw_Table_3():
     d["质差\n修复"] = Tab3["质差-感知修复"].astype(float)
     d["总质\n差率"] = Tab3["总整治成功率-总质差率"].astype(float)
 
-    sorted_numbers = sorted(set(d["感知\n修复"]))
-    third_smallest = sorted_numbers[2]
-    
+    sorted_numbers_1 = sorted(set(d["感知\n修复"]))
+    third_smallest_1 = sorted_numbers_1[2]
+
+    sorted_numbers_2 = sorted(set(d["质差\n修复"]))
+    third_smallest_2 = sorted_numbers_2[2]
+
+    sorted_numbers_3 = sorted(set(d["总质\n差率"]))
+    third_smallest_3 = sorted_numbers_3[2]
     fig, ax = plt.subplots(figsize=(10, 4.5))
     # 定义颜色断点和对应的值
     color_breakpoints = [(0, 'red'), (1, 'black')]
+
     # 创建 LinearSegmentedColormap 实例
     custom_cmap = LinearSegmentedColormap.from_list('custom_cmap', color_breakpoints, N=2)
+
     column = ([ColDef("index", title="单位", textprops={"ha": "center"}, border='both')]
             +
             [ColumnDefinition(name='派单\n数量', group="感知", border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='已修复', group='感知', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='未修复', group='感知', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='在途', group='感知', border='both', textprops={"ha": "center"}),
-            ColumnDefinition(
-                name='感知\n修复',
-                text_cmap=centered_cmap(d["感知\n修复"], cmap=custom_cmap, num_stds=1, center=third_smallest),
-                group='感知', border='both', textprops={"ha": "center"}),
+            ColumnDefinition(name='感知\n修复', 
+                             text_cmap=centered_cmap(d["感知\n修复"], cmap=custom_cmap, num_stds=1, center=third_smallest_1), 
+                             group='感知', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name=' 派单 \n 数量 ', group="质差", border='both', textprops={"ha": "center"}),
             ColumnDefinition(name=' 已修复 ', group='质差', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name=' 未修复 ', group='质差', border='both', textprops={"ha": "center"}),
             ColumnDefinition(name=' 在途 ', group='质差', border='both', textprops={"ha": "center"}),
-            ColumnDefinition(name='质差\n修复', group='质差', border='both', textprops={"ha": "center"}),
-            ColumnDefinition(name='总质\n差率', group="总整治成功率", border='both', textprops={"ha": "center"}),
+            ColumnDefinition(name='质差\n修复', 
+                             text_cmap=centered_cmap(d["质差\n修复"], cmap=custom_cmap, num_stds=1, center=third_smallest_2),
+                             group='质差', border='both', textprops={"ha": "center"}),
+            ColumnDefinition(name='总质\n差率', 
+                             text_cmap=centered_cmap(d["总质\n差率"], cmap=custom_cmap, num_stds=1, center=third_smallest_3), 
+                             group="总整治成功率", border='both', textprops={"ha": "center"}),
             ColumnDefinition(name='全市\n在途', group='总整治成功率', border='both', textprops={"ha": "center"})])
+    
+    # d["感知\n修复"] = Tab3["感知-感知修复"].apply(lambda x : format(x, '.1%'))
+
 
     # 基于pandas表格数据创建和展示图形表格
     tab = Table(d, column_definitions=column, row_dividers=True, footer_divider=True)
     # 保存图片
-    plt.savefig("./Pic/Table_3.png", dpi=600, bbox_inches='tight')
+    plt.savefig("./Pic/Table_3.png", dpi=1200, bbox_inches='tight')

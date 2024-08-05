@@ -47,7 +47,22 @@ def PPTX():
     # 添加Table_2图片
     image = slide.shapes.add_picture('./Pic/Table_2.png', Cm(0.5), Cm(39.25), Cm(21.15), Cm(9.75))
     # 添加Table_3图片
-    image = slide.shapes.add_picture('./Pic/Table_3.png', Cm(0.5), Cm(49.85), Cm(21.15), Cm(10.05))
+    if MySQL.Table_3.iloc[8, 0] != 0:
+        image = slide.shapes.add_picture('./Pic/Table_3.png', Cm(0.5), Cm(49.85), Cm(21.15), Cm(10.05))
+    else:
+        # 创建文本框并添加文本
+        textbox = slide.shapes.add_textbox(left=Cm(0.5), top=Cm(50), width=Cm(21.15), height=Cm(10.05))
+        tf = textbox.text_frame
+        # 添加文本，并设置格式
+        p = tf.paragraphs[0]  # 添加段落
+        run = p.add_run()  # 创建一个Run对象，不立即添加文本
+        run.text = '当月不满意、质差工单尚未更新，暂时不提供数据'  # 设置Run对象的文本
+        run.font.bold = True  # 设置文本加粗
+        run.font.size = Pt(18)  # 设置字号大小
+        run.font.name = '微软雅黑'  # 设置字体
+        # 设置文本的对齐方式
+        p.alignment = PP_ALIGN.LEFT
+
 
     # 第一个文本框
     # 创建文本框并添加文本
