@@ -219,16 +219,16 @@ def select_tablezc():
         num = cursor.execute(sql, (region + "%", today))
         Table_3.loc[region, "质差-派单数量"] = num
 
-        sql = "SELECT col1 FROM tablezc WHERE col42 LIKE %s AND col3 = '已修复' AND col = %s"
+        sql = "SELECT col1 FROM tablezc WHERE col42 LIKE %s AND col3 = '已修复' AND COL40 != 'nan' AND col = %s"
         num = cursor.execute(sql, (region + "%", today))
         Table_3.loc[region, "质差-已修复"] = num
 
-        sql = "SELECT col1 FROM tablezc WHERE col42 LIKE %s AND col40 = 'nan' AND col3 = '未修复' AND col = %s"
+        sql = "SELECT col1 FROM tablezc WHERE col42 LIKE %s AND col40 = 'nan' AND col = %s"
         num = cursor.execute(sql, (region + "%", today))
         Table_3.loc[region, "质差-在途"] = num
 
-        sql = "SELECT col1 FROM tablezc WHERE col42 LIKE %s AND col3 = '未修复' AND col = %s"
-        num = cursor.execute(sql, (region + "%", today)) - num
+        sql = "SELECT col1 FROM tablezc WHERE col42 LIKE %s AND col3 = '未修复' AND COL40 != 'nan' AND col = %s"
+        num = cursor.execute(sql, (region + "%", today))
         Table_3.loc[region, "质差-未修复"] = num
 
 # 文本实现：文本6， 表3

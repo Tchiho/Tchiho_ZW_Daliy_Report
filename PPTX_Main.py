@@ -47,7 +47,6 @@ def PPTX():
     # 添加Table_2图片
     image = slide.shapes.add_picture('./Pic/Table_2.png', Cm(0.5), Cm(39.25), Cm(21.15), Cm(9.75))
     # 添加Table_3图片
-    print(MySQL.Table_3.iloc[8, 0])
     if MySQL.Table_3.iloc[8, 0] != 0:
         ZW_PPT_Table.Draw_Table_3()
         image = slide.shapes.add_picture('./Pic/Table_3.png', Cm(0.5), Cm(49.85), Cm(21.15), Cm(10.05))

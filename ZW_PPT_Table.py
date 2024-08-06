@@ -106,13 +106,13 @@ def Draw_Table_3():
     d["质差\n修复"] = Tab3["质差-感知修复"].astype(float)
     d["总质\n差率"] = Tab3["总整治成功率-总质差率"].astype(float)
 
-    sorted_numbers_1 = sorted(set(d["感知\n修复"]))
+    sorted_numbers_1 = sorted(list(d["感知\n修复"]))
     third_smallest_1 = sorted_numbers_1[3]
 
-    sorted_numbers_2 = sorted(set(d["质差\n修复"]))
+    sorted_numbers_2 = sorted(list(d["质差\n修复"]))
     third_smallest_2 = sorted_numbers_2[3]
 
-    sorted_numbers_3 = sorted(set(d["总质\n差率"]))
+    sorted_numbers_3 = sorted(list(d["总质\n差率"]))
     third_smallest_3 = sorted_numbers_3[3]
     fig, ax = plt.subplots(figsize=(10, 4.5))
     # 定义颜色断点和对应的值
